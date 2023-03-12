@@ -44,13 +44,10 @@ public class Menu {
             System.out.println("9. Modificar un campeon");
             System.out.println("10. Modificar un hechizo");
             System.out.println("11. Modificar un objeto");
-            System.out.println("12. Crear un campeon manualmente");
-            System.out.println("13. Crear un hechizo manualmente");
-            System.out.println("14. Crear un objeto manualmente");
-            System.out.println("15. Borrar un campeon por su nombre.");
-            System.out.println("16. Borrar un hechizo por su nombre.");
-            System.out.println("17. Borrar un objeto por su nombre.");
-            System.out.println("18. Borrar todas las tablas.");
+            System.out.println("12. Borrar un campeon por su nombre.");
+            System.out.println("13. Borrar un hechizo por su nombre.");
+            System.out.println("14. Borrar un objeto por su nombre.");
+            System.out.println("15. Borrar todas las tablas.");
 
             System.out.println("0. Salir. ");
 
@@ -63,7 +60,7 @@ public class Menu {
             }
         } while (option != 1  && option != 2 && option != 3 && option != 4 && option != 5 && option != 6
                 && option != 7 && option != 8 && option != 9 && option != 10 && option != 11 && option != 12
-                && option != 13 && option != 14 && option != 15 && option != 16 && option != 17 && option != 18 && option != 0);
+                && option != 13 && option != 14 && option != 15 && option != 0);
 
         return option;
     }

@@ -90,7 +90,7 @@ public class ObjetosController {
   public void listAllObjetos() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<Objetos> result = em.createQuery("from Objetos", Objetos.class)
+    List<Objetos> result = em.createQuery("from objetos", Objetos.class)
             .getResultList();
 
     for (Objetos objetos : result) {
@@ -110,7 +110,7 @@ public class ObjetosController {
   public void orderObjetosByName() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<String> result = em.createQuery("SELECT c.name FROM Objetos c ORDER BY c.name", String.class)
+    List<String> result = em.createQuery("SELECT c.name FROM objetos c ORDER BY c.name", String.class)
             .getResultList();
 
     for (String nombre : result) {
@@ -161,16 +161,10 @@ public class ObjetosController {
     // crea la tabla Characters
     entityManager.createNativeQuery(
             "CREATE TABLE objetos ( " +
-                    "id_objetos integer NOT NULL," +
+                    "id_objetos serial NOT NULL," +
                     "popularidad character varying(3000) NOT NULL ," +
                     "porcentaje_de_victoria character varying(3000) NOT NULL," +
-                    "CONSTRAINT pk_campeones PRIMARY KEY (id_campeones)," +
-                    "CONSTRAINT fk_hechizos FOREIGN KEY (id_hechizos)" +
-                    "REFERENCES hechizos (id_hechizos) MATCH SIMPLE" +
-                    "ON UPDATE NO ACTION ON DELETE NO ACTION," +
-                    "CONSTRAINT fk_objetos KEY (id_objetos)" +
-                    "REFERENCES objetos (id_objetos) MATCH SIMPLE" +
-                    "ON UPDATE NO ACTION ON DELETE NO ACTION);" +
+                    "CONSTRAINT pk_objetos PRIMARY KEY (id_objetos)" +
                     ")"
     ).executeUpdate();
 
@@ -189,7 +183,7 @@ public class ObjetosController {
    @throws javax.persistence.PersistenceException Devuelve este error si ha habido un problema borrando
    */
   public void deleteObjetosByName(String name){
-    String sql = "FROM Objetos WHERE name = :name";
+    String sql = "FROM objetos WHERE name = :name";
 
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();

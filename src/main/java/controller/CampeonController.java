@@ -90,7 +90,7 @@ public class CampeonController {
   public void listAllCampeones() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<Campeones> result = em.createQuery("from Campeones", Campeones.class)
+    List<Campeones> result = em.createQuery("from campeones", Campeones.class)
             .getResultList();
 
     for (Campeones campeones : result) {
@@ -106,7 +106,7 @@ public class CampeonController {
   public void orderCampeonesByName() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<String> result = em.createQuery("SELECT c.name FROM Campeones c ORDER BY c.name", String.class)
+    List<String> result = em.createQuery("SELECT c.name FROM campeones c ORDER BY c.name", String.class)
             .getResultList();
 
     for (String name : result) {
@@ -190,7 +190,7 @@ public class CampeonController {
    @throws javax.persistence.PersistenceException Devuelve este error si ha habido un problema borrando
    */
   public void deleteCampeonesByName(String name){
-    String sql = "FROM Campeones WHERE name = :name";
+    String sql = "FROM campeones WHERE name = :name";
 
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();

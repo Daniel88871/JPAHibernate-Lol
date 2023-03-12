@@ -118,7 +118,6 @@ public class Main {
       switch (opcion) {
 
         case 1:
-
           try{
             campeonesController.createTableCampeones();
             hechizosController.createTableHechizos();
@@ -130,30 +129,27 @@ public class Main {
           break;
 
         case 2:
-
-          System.out.println("2!!");
           try {
             List<Objetos> objetos = objetosController.readObjetosFile("src/main/resources/objetos.csv");
-            for (Objetos w : objetos) {
+            for (Objetos object : objetos) {
               try {
-                objetosController.addObjetos(w);
+                objetosController.addObjetos(object);
               } catch (Exception e) {
               }
             }
 
-
             List<Campeones> campeones = campeonesController.readCampeonesFile("src/main/resources/campeones.csv");
-            for (Campeones ct : campeones) {
+            for (Campeones champs : campeones) {
               try {
-                campeonesController.addCampeones(ct);
+                campeonesController.addCampeones(champs);
               } catch (Exception e) {
               }
             }
 
             List<Hechizos> hechizos = hechizosController.readHechizosFile("src/main/resources/hechizos.csv");
-            for (Hechizos ch : hechizos) {
+            for (Hechizos summons : hechizos) {
               try {
-                hechizosController.addHechizos(ch);
+                hechizosController.addHechizos(summons);
               } catch (Exception e) {
               }
             }
@@ -183,17 +179,17 @@ public class Main {
           break;
 
         case 7:
-          try{
-            campeonesController.listAllCampeones();
-          }catch (Exception e){
-            System.out.println("No se ha encontrado ningun campeon con el nombre que has proporcionado, intentalo de nuevo");
-          }
+          hechizosController.orderHechizosByName();
           break;
 
         case 8:
-          System.out.println("Que ID tiene el campeon que quieres cambiar? Del 1 al 30");
+          objetosController.orderObjetosByName();
+          break;
+
+        case 9:
+          System.out.println("Que ID tiene el campeon que quieres cambiar? Del 1 al 162");
           int idCampeon = scanner.nextInt();
-          if(idCampeon >= 1 && idCampeon < 31){
+          if(idCampeon >= 0 && idCampeon < 163){
             System.out.print("Escribe el nombre nuevo para el campeon que quieres modificar: ");
             String updateName = scanner.nextLine();
 
@@ -204,7 +200,7 @@ public class Main {
           }
           break;
 
-        case 9:
+        case 10:
           System.out.println("Que ID tiene el hechizo que quieres cambiar? Del 1 al 30");
           int idHechizo = scanner.nextInt();
           if(idHechizo >= 1 && idHechizo < 31){
@@ -218,35 +214,42 @@ public class Main {
           }
           break;
 
-        case 10:
-          System.out.println("Para crear un nuevo campeon, rellena este formulario");
-          System.out.println();
-
-          System.out.println("Escribe el nombre del nuevo campeón: ");
-          String newCampeon = scanner.next();
-          break;
-
         case 11:
-          hechizosController.createTableHechizos();
+          System.out.println("Que ID tiene el objeto que quieres cambiar? Del 1 al 30");
+          int idObjeto = scanner.nextInt();
+          if(idObjeto >= 1 && idObjeto < 31){
+            System.out.print("Escribe el daño nuevo para el weapon que quieres modificar: ");
+            String updateObjetos = scanner.next();
+
+            objetosController.updateObjetos(idObjeto,updateObjetos);
+          }
+          else{
+            System.out.println("La ID que estas intentando buscar no existe, recuerda que tiene que ser del 1 al 30!");
+          }
           break;
 
         case 12:
-          System.out.print("Inserta el nombre del character que quieres borrar: ");
+          System.out.print("Inserta el nombre del campeon que quieres borrar: ");
           String deleteCampeonByName = scanner.nextLine();
 
           campeonesController.deleteCampeonesByName(deleteCampeonByName);
           break;
 
-
         case 13:
-          System.out.print("Inserta el nombre del weapon que quieres borrar: ");
+          System.out.print("Inserta el nombre del hechizo que quieres borrar: ");
           String deleteNameHechizo = scanner.nextLine();
 
           hechizosController.deleteHechizosByName(deleteNameHechizo);
           break;
 
         case 14:
+          System.out.print("Inserta el nombre del objeto que quieres borrar: ");
+          String deleteNameObjeto = scanner.nextLine();
 
+          hechizosController.deleteHechizosByName(deleteNameObjeto);
+          break;
+
+        case 15:
           try{
             campeonesController.dropTableCampeones();
             hechizosController.dropTableHechizos();

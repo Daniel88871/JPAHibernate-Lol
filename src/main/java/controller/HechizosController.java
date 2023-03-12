@@ -97,7 +97,7 @@ public class HechizosController {
   public void listAllHechizos() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<Hechizos> result = em.createQuery("from Hechizos", Hechizos.class)
+    List<Hechizos> result = em.createQuery("from hechizos", Hechizos.class)
             .getResultList();
 
     for (Hechizos hechizos : result) {
@@ -117,7 +117,7 @@ public class HechizosController {
   public void orderHechizosByName() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<String> result = em.createQuery("SELECT c.name FROM Hechizos c ORDER BY c.name", String.class)
+    List<String> result = em.createQuery("SELECT c.name FROM hechizos c ORDER BY c.name", String.class)
             .getResultList();
 
     for (String name : result) {
@@ -167,17 +167,11 @@ public class HechizosController {
     // crea la tabla Characters
     entityManager.createNativeQuery(
             "CREATE TABLE hechizos ( " +
-                    "id_hechizos integer," +
+                    "id_hechizos serial NOT NULL," +
                     "nombre character varying(3000) NOT NULL," +
                     "popularidad character varying(3000) NOT NULL ," +
                     "porcentaje_de_victoria character varying(3000) NOT NULL," +
-                    "CONSTRAINT pk_campeones PRIMARY KEY (id_campeones)," +
-                    "CONSTRAINT fk_hechizos FOREIGN KEY (id_hechizos)" +
-                    "REFERENCES hechizos (id_hechizos) MATCH SIMPLE" +
-                    "ON UPDATE NO ACTION ON DELETE NO ACTION," +
-                    "CONSTRAINT fk_objetos KEY (id_objetos)" +
-                    "REFERENCES objetos (id_objetos) MATCH SIMPLE" +
-                    "ON UPDATE NO ACTION ON DELETE NO ACTION);" +
+                    "CONSTRAINT pk_hechizos PRIMARY KEY (id_hechizos)" +
                     ")"
     ).executeUpdate();
 
@@ -196,7 +190,7 @@ public class HechizosController {
    @throws javax.persistence.PersistenceException Devuelve este error si ha habido un problema borrando
    */
   public void deleteHechizosByName(String name){
-    String sql = "FROM Hechizos WHERE name = :name";
+    String sql = "FROM hechizos WHERE name = :name";
 
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
