@@ -16,9 +16,9 @@ import java.sql.Connection;
 import java.util.*;
 
 /**
- * Esta clase es el controlador del character, que nos ayuda a interactuar con la tabla characters.
+ * Esta clase es el controlador de los hechizos, que nos ayuda a interactuar con la tabla hechizos.
  *
- * @author tarikii
+ * @author Daniel88871
  */
 public class HechizosController {
 
@@ -31,10 +31,10 @@ public class HechizosController {
   }
 
   /**
-   * Creamos una nueva instancia del controlador del character usando la conexion de la base de datos
+   * Creamos una nueva instancia del controlador del hechizo usando la conexión de la base de datos
    *
-   * @param connection Le pasamos la conexion de la base de datos
-   * @param entityManagerFactory Le pasamos tambien el Hibernate que hemos creado
+   * @param connection Le pasamos la conexión de la base de datos
+   * @param entityManagerFactory Le pasamos también el Hibernate que hemos creado
    */
   public HechizosController(Connection connection, EntityManagerFactory entityManagerFactory) {
     this.connection = connection;
@@ -44,14 +44,14 @@ public class HechizosController {
 
   /**
    * Esta clase se encarga de leer el archivo CSV, y con este archivo rellenarnos toda la tabla de nuestra
-   * base de datos con la informacion que saca del archivo.
+   * base de datos con la información que saca del archivo.
    *
-   * @param hechizosFile la ruta del archivo characters que queremos leer
-   * @return Una lista de characters, que luego se meteran con ayuda de otros metodos
-   * @throws IOException Devuelve este error si hay algun problema al leer los archivos
+   * @param hechizosFile la ruta del archivo hechizos que queremos leer
+   * @return Una lista de hechizos, que luego se meterán con ayuda de otros métodos
+   * @throws IOException Devuelve este error si hay algún problema al leer los archivos
    */
   public List<Hechizos> readHechizosFile(String hechizosFile) throws IOException {
-    String id;
+    int id;
     String nombre;
     String popularidad;
     String porcentajedevictoria;
@@ -61,11 +61,11 @@ public class HechizosController {
     String linea = "";
     while ((linea = br.readLine()) != null) {
       StringTokenizer str = new StringTokenizer(linea, ",");
-      id = (str.nextToken());
-      nombre = str.nextToken();
+      id = Integer.parseInt(str.nextToken());
+      nombre = (str.nextToken());
       popularidad = (str.nextToken());
       porcentajedevictoria = (str.nextToken());
-      hechizosList.add(new Hechizos(id,nombre,popularidad, porcentajedevictoria));
+      hechizosList.add(new Hechizos(id, nombre, popularidad, porcentajedevictoria));
 
     }
     br.close();
@@ -74,16 +74,16 @@ public class HechizosController {
   }
 
   /**
-   * Añade un character (que procesamos con el csv) y lo mete en la base de datos
+   * Añade un hechizo y lo mete en la base de datos
    *
-   * @param hechizos El character que queremos añadir
+   * @param hechizos El hechizo que queremos añadir
    */
   public void addHechizos(Hechizos hechizos) {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
     Hechizos hechizosExists = (Hechizos) em.find(Hechizos.class, hechizos.getHechizosId());
     if (hechizosExists == null ){
-      System.out.println("inserting hechizos...");
+      System.out.println("insertando hechizos...");
       em.persist(hechizos);
     }
     em.merge(hechizos);
@@ -92,12 +92,12 @@ public class HechizosController {
   }
 
   /**
-   * Lista todos los characters de la base de datos
+   * Lista todos los hechizos de la base de datos
    */
   public void listAllHechizos() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<Hechizos> result = em.createQuery("from hechizos", Hechizos.class)
+    List<Hechizos> result = em.createQuery("from Hechizos", Hechizos.class)
             .getResultList();
 
     for (Hechizos hechizos : result) {
@@ -108,16 +108,12 @@ public class HechizosController {
   }
 
   /**
-   * Lista todos los characters que sean Plant
-   */
-
-  /**
-   * Ordena los characters por su nombre y los lista
+   * Ordena los hechizos por su nombre y los muestra por pantalla
    */
   public void orderHechizosByName() {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
-    List<String> result = em.createQuery("SELECT c.name FROM hechizos c ORDER BY c.name", String.class)
+    List<String> result = em.createQuery("SELECT c.nombre FROM Hechizos c ORDER BY c.nombre", String.class)
             .getResultList();
 
     for (String name : result) {
@@ -128,104 +124,84 @@ public class HechizosController {
   }
 
   /**
-   * Actualiza el nombre del character que buscaras con su ID
+   * Actualiza el nombre del hechizo que buscaras con su ID
    *
-   * @param hechizoId El ID del character que quieres actualizar
+   * @param hechizoId El ID del hechizo que quieres actualizar
    */
   public void updateHechizos(int hechizoId, String hechizos1) {
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
     Hechizos hechizos = (Hechizos) em.find(Hechizos.class, hechizoId);
-    hechizos.setNombre(hechizos1);;
+    hechizos.setNombre(hechizos1);
     em.merge(hechizos);
     em.getTransaction().commit();
 
     em.getTransaction().begin();
     hechizos = em.find(Hechizos.class, hechizoId);
-    System.out.println("Informacion del hechizo despues de tu Update:");
     System.out.println(hechizos.toString());
     em.getTransaction().commit();
-
     em.close();
   }
 
 
   /**
-   * Crea la tabla characters con ayuda del schema SQL
+   * Crea la tabla hechizos con ayuda del schema SQL
    *
    */
   public void createTableHechizos() {
-    // crea un EntityManagerFactory utilizando la configuración definida en persistence.xml
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPAMagazines");
-
-    // obtiene un EntityManager a partir del EntityManagerFactory
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-    // comienza una transacción
     entityManager.getTransaction().begin();
-
-    // crea la tabla Characters
     entityManager.createNativeQuery(
             "CREATE TABLE hechizos ( " +
-                    "id_hechizos serial NOT NULL," +
-                    "nombre character varying(3000) NOT NULL," +
-                    "popularidad character varying(3000) NOT NULL ," +
-                    "porcentaje_de_victoria character varying(3000) NOT NULL," +
-                    "CONSTRAINT pk_hechizos PRIMARY KEY (id_hechizos)" +
+                    " id_hechizos serial NOT NULL, " +
+                    " nombre character varying(3000) NOT NULL, " +
+                    " popularidad character varying(3000) NOT NULL , " +
+                    " porcentaje_de_victoria character varying(3000) NOT NULL, " +
+                    " CONSTRAINT pk_hechizos PRIMARY KEY (id_hechizos) " +
                     ")"
     ).executeUpdate();
-
-    // finaliza la transacción
     entityManager.getTransaction().commit();
-
-    // cierra el EntityManager y el EntityManagerFactory
     entityManager.close();
     entityManagerFactory.close();
   }
 
   /**
-   * Borra el character o los characters que poseen el mismo nombre que pone nuestro usuario por pantalla
+   * Borra el hechizo ya existente que le pasemos por pantalla
    *
-   @param name El nombre del character a borrar
+   @param name El nombre del hechizo a borrar
    @throws javax.persistence.PersistenceException Devuelve este error si ha habido un problema borrando
    */
   public void deleteHechizosByName(String name){
-    String sql = "FROM hechizos WHERE name = :name";
+    String sql = "FROM Hechizos WHERE nombre = :nombre";
 
     EntityManager em = entityManagerFactory.createEntityManager();
     em.getTransaction().begin();
     List<Hechizos> result = em.createQuery(sql, Hechizos.class)
-            .setParameter("name", name)
+            .setParameter("nombre", name)
             .getResultList();
     for (Hechizos hechizos : result) {
       em.remove(hechizos);
     }
-    em.getTransaction().commit();
+    try{
+      em.getTransaction().commit();
+    }catch (Exception e){
+      e.printStackTrace();
+    }
     em.close();
   }
 
   /**
-   * Dropea la tabla entera de characters
+   * Borra completamente la tabla hechizos
    *
-   @throws javax.persistence.PersistenceException Devuelve este error si hay un problema dropeando la tabla
+   @throws javax.persistence.PersistenceException Devuelve este error si hay un problema borrando la tabla
    */
   public void dropTableHechizos() {
-    // crea un EntityManagerFactory utilizando la configuración definida en persistence.xml
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPAMagazines");
-
-    // obtiene un EntityManager a partir del EntityManagerFactory
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-    // comienza una transacción
     entityManager.getTransaction().begin();
-
-    // dropea la tabla characters
     entityManager.createNativeQuery("DROP TABLE hechizos").executeUpdate();
-
-    // finaliza la transacción
     entityManager.getTransaction().commit();
-
-    // cierra el EntityManager y el EntityManagerFactory
     entityManager.close();
     entityManagerFactory.close();
   }

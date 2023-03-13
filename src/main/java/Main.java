@@ -23,11 +23,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- * Esta clas nos da lo necesario para que el usuario pueda interactuar con nuestra base de datos
- * a partir de un menu que nosotros proveemos, el usuario escoge una opcion con un int, y nuestro programa
- * hara lo que la opcion del menu nos ha indicado
+ * Esta clase nos da lo necesario para que el usuario pueda interactuar con nuestra base de datos
+ * a partir de un menu que nosotros proveemos, el usuario escoge una opción con un int, y nuestro programa
+ * hará lo que la opción del menu nos ha indicado
  *
- * @author tarikii
+ * @author Daniel88871
  */
 public class Main {
   private static final Scanner scanner = new Scanner(System.in);
@@ -35,21 +35,10 @@ public class Main {
   static SessionFactory sessionFactoryObj;
 
   /**
-   * Creamos un constructor vacio de Main (porque simplemente nos da un error en JavaDoc si no lo hacemos)
+   * Creamos un constructor vacio de Main
    *
    */
   public Main(){}
-/*
-  private static SessionFactory buildSessionFactory() {
-    // Creating Configuration Instance & Passing Hibernate Configuration File
-    Configuration configObj = new Configuration();
-    configObj.configure("hibernate.cfg.xml");
-    // Since Hibernate Version 4.x, ServiceRegistry Is Being Used
-    ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build();
-    // Creating Hibernate SessionFactory Instance
-    sessionFactoryObj = configObj.buildSessionFactory(serviceRegistryObj);
-    return sessionFactoryObj;
-  } */
 
   /**
    * Construye un Object Hibernate para que podamos empezar a interactuar con la base de datos.
@@ -86,9 +75,9 @@ public class Main {
   }
 
   /**
-   * Aqui basicamente muestra el menu interactuable con el usuario, donde podremos toquetear la base de datos.
+   * Aqui mostramos el menu interactuable con el usuario, donde podremos toquetear la base de datos.
    *
-   * @param args Los argumentos que le pasamos por consola (no se usa)
+   * @param args Los argumentos que le pasamos por consola
    */
   public static void main(String[] args) {
     boolean salirMenu = false;
@@ -100,7 +89,6 @@ public class Main {
     EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
     //sessionObj = buildSessionFactory().openSession();
 
-    //Creamos los 3 controladores que hemos creado para poder usar las tablas de la base de datos
     CampeonController campeonesController = new CampeonController(c, entityManagerFactory);
     HechizosController hechizosController = new HechizosController(c, entityManagerFactory);
     ObjetosController objetosController = new ObjetosController(c, entityManagerFactory);
@@ -108,20 +96,16 @@ public class Main {
     Menu menu = new Menu();
     int opcion;
 
-
-    //Nos saldra el menu infinitas veces, hasta que se presione la tecla 0 que nos cierra el programa.
     while(!salirMenu){
       opcion = menu.mainMenu();
 
-      //Aqui se muestran todas las opciones del menu, cada opcion se encarga de lo que indicamos al usuario
-      //por escrito en el menu
       switch (opcion) {
 
         case 1:
           try{
-            campeonesController.createTableCampeones();
             hechizosController.createTableHechizos();
             objetosController.createTableObjetos();
+            campeonesController.createTableCampeones();
           }catch (Exception e){
             System.out.println("Hay una o varias tablas que quieres crear que ya existen en la base de datos");
           }
@@ -130,6 +114,14 @@ public class Main {
 
         case 2:
           try {
+            List<Hechizos> hechizos = hechizosController.readHechizosFile("src/main/resources/hechizos.csv");
+            for (Hechizos summons : hechizos) {
+              try {
+                hechizosController.addHechizos(summons);
+              } catch (Exception e) {
+              }
+            }
+
             List<Objetos> objetos = objetosController.readObjetosFile("src/main/resources/objetos.csv");
             for (Objetos object : objetos) {
               try {
@@ -143,14 +135,7 @@ public class Main {
               try {
                 campeonesController.addCampeones(champs);
               } catch (Exception e) {
-              }
-            }
-
-            List<Hechizos> hechizos = hechizosController.readHechizosFile("src/main/resources/hechizos.csv");
-            for (Hechizos summons : hechizos) {
-              try {
-                hechizosController.addHechizos(summons);
-              } catch (Exception e) {
+                e.printStackTrace();
               }
             }
 
@@ -189,42 +174,45 @@ public class Main {
         case 9:
           System.out.println("Que ID tiene el campeon que quieres cambiar? Del 1 al 162");
           int idCampeon = scanner.nextInt();
-          if(idCampeon >= 0 && idCampeon < 163){
-            System.out.print("Escribe el nombre nuevo para el campeon que quieres modificar: ");
+          scanner.nextLine();
+          if(idCampeon >= 1 && idCampeon < 163){
+            System.out.print("Escribe el nuevo nombre para el campeon que quieras modificar: ");
             String updateName = scanner.nextLine();
 
             campeonesController.updateCampeones(idCampeon,updateName);
           }
           else{
-            System.out.println("La ID que estas intentando buscar no existe, recuerda que tiene que ser del 1 al 30!");
+            System.out.println("La ID que estas intentando buscar no existe, tiene que ser del 1 al 162.");
           }
           break;
 
         case 10:
-          System.out.println("Que ID tiene el hechizo que quieres cambiar? Del 1 al 30");
-          int idHechizo = scanner.nextInt();
-          if(idHechizo >= 1 && idHechizo < 31){
-            System.out.print("Escribe el daño nuevo para el weapon que quieres modificar: ");
+          System.out.println("Que nombre tiene el hechizo que quieres cambiar? Del 1 al 10");
+            int idHechizo = scanner.nextInt();
+            scanner.nextLine();
+          if(idHechizo >= 1 && idHechizo < 11){
+            System.out.print("Escribe el nuevo nombre para el hechizo que quieras modificar: ");
             String updateHechizos = scanner.next();
 
             hechizosController.updateHechizos(idHechizo,updateHechizos);
           }
           else{
-            System.out.println("La ID que estas intentando buscar no existe, recuerda que tiene que ser del 1 al 30!");
+            System.out.println("La ID que estas intentando buscar no existe, tiene que ser del 1 al 10.");
           }
           break;
 
         case 11:
-          System.out.println("Que ID tiene el objeto que quieres cambiar? Del 1 al 30");
-          int idObjeto = scanner.nextInt();
-          if(idObjeto >= 1 && idObjeto < 31){
-            System.out.print("Escribe el daño nuevo para el weapon que quieres modificar: ");
-            String updateObjetos = scanner.next();
+          System.out.println("Que ID tiene el objeto que quieres cambiar? Del 1 al 5");
+            int idObjeto = scanner.nextInt();
+            scanner.nextLine();
+          if(idObjeto >= 1 && idObjeto < 6){
+            System.out.print("Escribe el nuevo porcentaje de victoria para el objeto que quieras modificar: ");
+            String updatePorcentaje = scanner.nextLine();
 
-            objetosController.updateObjetos(idObjeto,updateObjetos);
+            objetosController.updateObjetos(idObjeto,updatePorcentaje);
           }
           else{
-            System.out.println("La ID que estas intentando buscar no existe, recuerda que tiene que ser del 1 al 30!");
+            System.out.println("La ID que estas intentando buscar no existe, tiene que ser del 1 al 5.");
           }
           break;
 
@@ -232,21 +220,22 @@ public class Main {
           System.out.print("Inserta el nombre del campeon que quieres borrar: ");
           String deleteCampeonByName = scanner.nextLine();
 
-          campeonesController.deleteCampeonesByName(deleteCampeonByName);
+          campeonesController.deleteCampeonesByName('"' + deleteCampeonByName + '"');
           break;
 
         case 13:
           System.out.print("Inserta el nombre del hechizo que quieres borrar: ");
+          System.out.println("Para borrar un hechizo tienes que eliminar primero el campeón que tenga ese hechizo.");
           String deleteNameHechizo = scanner.nextLine();
 
-          hechizosController.deleteHechizosByName(deleteNameHechizo);
+          hechizosController.deleteHechizosByName('"' + deleteNameHechizo + '"');
           break;
 
         case 14:
-          System.out.print("Inserta el nombre del objeto que quieres borrar: ");
-          String deleteNameObjeto = scanner.nextLine();
+          System.out.print("Inserta el ID del objeto que quieres borrar: ");
+          int deleteNameObjeto = scanner.nextInt();
 
-          hechizosController.deleteHechizosByName(deleteNameObjeto);
+          objetosController.deleteObjetosByName(deleteNameObjeto);
           break;
 
         case 15:
@@ -259,10 +248,9 @@ public class Main {
           }
 
           break;
-        default:
+          default:
           System.out.println("Deu");
           salirMenu = true;
-          //System.exit(1);
       }
     }
   }

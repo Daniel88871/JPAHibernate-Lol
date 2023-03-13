@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Esta clase representara todos los characters que vayamos metiendo en la tabla characters de nuestra
+ * Esta clase representara todos los objetos que vayamos metiendo en la tabla objetos de nuestra
  * base de datos
  *
- @author tarikii
+ @author Daniel88871
  */
 @Entity
 @Access(AccessType.FIELD)
@@ -15,22 +15,22 @@ import java.io.Serializable;
 public class Objetos implements Serializable {
 
   /**
-   * El identificador del character
+   * El identificador del objeto
    *
    */
   @Id
   @Column(name = "id_objetos")
-  String objetosId;
+  int objetosId;
 
   /**
-   * El identificador del weapon
+   * El identificador de popularidad
    *
    */
   @Column(name = "popularidad")
   String popularidad;
 
   /**
-   * El nombre del character
+   * El identificador del porcentaje de victoria
    *
    */
   @Column(name = "porcentaje_de_victoria")
@@ -39,77 +39,79 @@ public class Objetos implements Serializable {
 
 
   /**
-   * Construye un character nuevo con una serie de atributos
+   * Construye un objeto nuevo con una serie de atributos
    *
-   @param objetosId El identificador del character
-   @param popularidad El identificador del weapon que posee el character
+   @param objetosId El identificador del objeto
+   @param popularidad El identificador de popularidad que posee el objeto
    */
-  public Objetos(String objetosId, String popularidad, String porcentajedevictoria) {
+  public Objetos(int objetosId, String popularidad, String porcentajedevictoria) {
     super();
     this.objetosId = objetosId;
     this.popularidad = popularidad;
     this.porcentajedevictoria = porcentajedevictoria;
+  }
 
+  public Objetos() {
   }
 
   /**
-   * Devuelve la ID de un character
+   * Devuelve la ID de un objeto
    *
    @return Su identificador
    */
-  public String getObjetosId() {
+  public int getObjetosId() {
     return objetosId;
   }
 
   /**
-   * Editamos el identificador del character
+   * Editamos el identificador del objeto
    *
    * @param objetosId Le pasamos la nueva ID
    */
-  public void setObjetosId(String objetosId) {
+  public void setObjetosId(int objetosId) {
     this.objetosId = objetosId;
   }
 
   /**
-   * Nos devuelve el identificador del weapon
+   * Nos devuelve el identificador de popularidad
    *
-   * @return El ID del weapon
+   * @return El ID de popularidad
    */
   public String getPopularidad() {
     return popularidad;
   }
 
   /**
-   * Edita el identificador del weapon de character
+   * Edita el identificador de popularidad del objeto
    *
-   @param popularidad Su nuevo weapon
+   @param popularidad Su nuevo porcentaje
    */
   public void setPopularidad(String popularidad) {
     this.popularidad = popularidad;
   }
 
   /**
-   * Nos da el nombre del character
+   * Nos da el porcentaje de victoria
    *
-   * @return devuelve el nombre del character
+   * @return devuelve el porcentaje de victoria
    */
   public String getPorcentajedevictoria() {
     return porcentajedevictoria;
   }
 
   /**
-   * Edita el nombre del character
+   * Edita el porcentaje de victoria
    *
-   @param porcentajedevictoria Su nuevo nombre
+   @param porcentajedevictoria Su nuevo porcentaje
    */
   public void setPorcentajedevictoria(String porcentajedevictoria) {
     this.porcentajedevictoria = porcentajedevictoria;
   }
 
   /**
-   * Devuelve una representacion del character en forma de String
+   * Devuelve una representación del objeto en forma de String
    *
-   * @return devuelve el string del character con sus atributos
+   * @return devuelve el string del objeto con sus atributos
    */
   @Override
   public String toString() {

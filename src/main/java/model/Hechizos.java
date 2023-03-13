@@ -6,40 +6,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta clase representara todos los characters que vayamos metiendo en la tabla characters de nuestra
+ * Esta clase representará todos los hechizos que vayamos metiendo en la tabla hechizos de nuestra
  * base de datos
  *
- @author tarikii
+ @author Daniel88871
  */
 @Entity
 @Access(AccessType.FIELD)
-@Table(name = "campeones")
+@Table(name = "hechizos")
 public class Hechizos implements Serializable {
 
   /**
-   * El identificador del character
+   * El identificador del hechizo
    *
    */
   @Id
   @Column(name = "id_hechizos")
-  String hechizosId;
+  int hechizosId;
 
   /**
-   * El identificador del tipo de character
+   * El identificador del nombre
    *
    */
   @Column(name = "nombre")
   String nombre;
 
   /**
-   * El identificador del weapon
+   * El identificador de popularidad
    *
    */
   @Column(name = "popularidad")
   String popularidad;
 
   /**
-   * El nombre del character
+   * El identificador del porcentaje de victorias
    *
    */
   @Column(name = "porcentaje_de_victoria")
@@ -47,14 +47,14 @@ public class Hechizos implements Serializable {
 
 
   /**
-   * Construye un character nuevo con una serie de atributos
+   * Construye un hechizo nuevo con una serie de atributos
    *
-   @param campeonesId El identificador del character
-   @param nombre El identificador del tipo del character, Plant o Zombie
-   @param popularidad El identificador del weapon que posee el character
-   @param porcentaje_de_victoria El nombre del character
+   @param hechizosId El identificador del hechizo
+   @param nombre El identificador del nombre
+   @param popularidad El identificador de popularidad
+   @param porcentajedevictoria El identificador del porcentaje de victorias
    */
-  public Hechizos(String hechizosId, String nombre, String popularidad, String porcentajedevictoria) {
+  public Hechizos(int hechizosId, String nombre, String popularidad, String porcentajedevictoria) {
     super();
     this.hechizosId = hechizosId;
     this.nombre = nombre;
@@ -62,73 +62,76 @@ public class Hechizos implements Serializable {
     this.porcentajedevictoria = porcentajedevictoria;
   }
 
+  public Hechizos (){
+  }
+
   /**
-   * Devuelve la ID de un character
+   * Devuelve la ID de un hechizo
    *
    @return Su identificador
    */
-  public String getHechizosId() {
+  public int getHechizosId() {
     return hechizosId;
   }
 
   /**
-   * Editamos el identificador del character
+   * Editamos el identificador del hechizo
    *
-   * @param campeonesId Le pasamos la nueva ID
+   * @param hechizosId Le pasamos la nueva ID
    */
-  public void setHechizosId(String hechizosId) {
+  public void setHechizosId(int hechizosId) {
     this.hechizosId = hechizosId;
   }
 
   /**
-   * Nos devuelve el identificador del tipo
+   * Nos devuelve el identificador del nombre
    *
-   * @return ID del tipo
+   * @return ID del nombre
    */
   public String getNombre() {
     return nombre;
   }
 
   /**
-   * Edita el identificador del tipo de character
+   * Edita el identificador del tipo del nombre del hechizo
    *
-   @param nombre Su nuevo tipo
+   @param nombre Su nuevo nombre
    */
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
 
   /**
-   * Nos devuelve el identificador del weapon
+   * Nos devuelve el identificador de la popularidad
    *
-   * @return El ID del weapon
+   * @return El ID de popularidad
    */
   public String getPopularidad() {
     return popularidad;
   }
 
   /**
-   * Edita el identificador del weapon de character
+   * Edita el identificador de popularidad
    *
-   @param popularidad Su nuevo weapon
+   @param popularidad Su nuevo porcentaje
    */
   public void setPopularidad(String popularidad) {
     this.popularidad = popularidad;
   }
 
   /**
-   * Nos da el nombre del character
+   * Nos devuelve el porcentaje de victoria del hechizo
    *
-   * @return devuelve el nombre del character
+   * @return devuelve el porcentaje de victoria
    */
   public String getPorcentajedevictoria() {
     return porcentajedevictoria;
   }
 
   /**
-   * Edita el nombre del character
+   * Edita el porcentaje de victoria del hechizo
    *
-   @param porcentajedevictoria Su nuevo nombre
+   @param porcentajedevictoria Su nuevo porcentaje
    */
   public void setPorcentajedevictoria(String porcentajedevictoria) {
     this.porcentajedevictoria = porcentajedevictoria;
@@ -136,9 +139,9 @@ public class Hechizos implements Serializable {
 
 
   /**
-   * Devuelve una representacion del character en forma de String
+   * Devuelve una representación del hechizo en forma de String
    *
-   * @return devuelve el string del character con sus atributos
+   * @return devuelve el string del hechizo con sus atributos
    */
   @Override
   public String toString() {

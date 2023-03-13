@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta clase representara todos los characters que vayamos metiendo en la tabla characters de nuestra
+ * Esta clase representará todos los campeones que vayamos metiendo en la tabla campeones de nuestra
  * base de datos
  *
- @author tarikii
+ @author Daniel88871
  */
 @Entity
 @Access(AccessType.FIELD)
@@ -17,50 +17,64 @@ import java.util.List;
 public class Campeones implements Serializable {
 
   /**
-   * El identificador del character
+   * El identificador del campeón
    *
    */
   @Id
   @Column(name = "id_campeones")
-  String campeonesId;
+  int campeonesId;
 
   /**
-   * El identificador del tipo de character
+   * El identificador de los hechizos
+   *
+   */
+  @Column(name = "id_hechizos")
+  int hechizosId;
+
+  /**
+   * El identificador de los objetos
+   *
+   */
+  @Column(name = "id_objetos")
+  int objetosId;
+
+  /**
+   * El identificador del nombre
    *
    */
   @Column(name = "nombre")
   String nombre;
 
   /**
-   * El identificador del weapon
+   * El identificador de popularidad
    *
    */
   @Column(name = "popularidad")
   String popularidad;
 
   /**
-   * El nombre del character
+   * El identificador del porcentaje de victoria
    *
    */
   @Column(name = "porcentaje_de_victoria")
   String porcentajedevictoria;
 
   /**
-   * La imagen del character
+   * El identificador del porcentaje de baneo
    *
    */
   @Column(name = "porcentaje_de_baneo")
   String porcentajedebaneo;
 
   /**
-   * La vida del character
+   * El identificador del KDA
    *
    */
   @Column(name = "kda")
   String kda;
 
   /**
-   * La variant del character
+   * El identificador de los pentas por partida
    *
    */
   @Column(name = "pentas_por_partida")
@@ -68,18 +82,21 @@ public class Campeones implements Serializable {
 
 
   /**
-   * Construye un character nuevo con una serie de atributos
+   * Construye un campeón nuevo con una serie de atributos
    *
-   @param campeonesId El identificador del character
-   @param nombre El identificador del tipo del character, Plant o Zombie
-   @param popularidad El identificador del weapon que posee el character
-   @param porcentaje_de_victoria El nombre del character
-   @param porcentaje_de_baneo El archivo que contiene una imagen del character
-   @param kda La vida del character
-   @param pentas_por_partida La variante del character
+   @param campeonesId El identificador del campeón
+   @param nombre El identificador de nombre del campeón
+   @param popularidad El identificador de popularidad del campeón
+   @param porcentaje_de_victoria El identificador de porcentaje de victoria del campeón
+   @param porcentaje_de_baneo El identificador de porcentaje de baneo del campeón
+   @param kda El identificador del KDA del campeón
+   @param pentas_por_partida El identificador de las pentas por partida
    */
-  public Campeones(String campeonesId, String nombre, String popularidad, String porcentaje_de_victoria, String porcentaje_de_baneo, String kda, String pentas_por_partida) {
+  public Campeones(int campeonesId, int hechizosId, int objetosId, String nombre, String popularidad,
+                   String porcentaje_de_victoria, String porcentaje_de_baneo, String kda, String pentas_por_partida) {
     super();
+    this.hechizosId = hechizosId;
+    this.objetosId = objetosId;
     this.campeonesId = campeonesId;
     this.nombre = nombre;
     this.popularidad = popularidad;
@@ -89,137 +106,139 @@ public class Campeones implements Serializable {
     this.pentasporpartida = pentas_por_partida;
   }
 
+  public Campeones (){
+  }
 
   /**
-   * Devuelve la ID de un character
+   * Devuelve la ID de un campeón
    *
    @return Su identificador
    */
-  public String getCampeonesId() {
+  public int getCampeonesId() {
     return campeonesId;
   }
 
   /**
-   * Editamos el identificador del character
+   * Editamos el identificador del campeón
    *
    * @param campeonesId Le pasamos la nueva ID
    */
-  public void setCampeonesId(String campeonesId) {
+  public void setCampeonesId(int campeonesId) {
     this.campeonesId = campeonesId;
   }
 
   /**
-   * Nos devuelve el identificador del tipo
+   * Nos devuelve el identificador del nombre
    *
-   * @return ID del tipo
+   * @return ID del nombre
    */
   public String getNombre() {
     return nombre;
   }
 
   /**
-   * Edita el identificador del tipo de character
+   * Edita el identificador del nombre del campeón
    *
-   @param nombre Su nuevo tipo
+   @param nombre Su nuevo nombre
    */
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
 
   /**
-   * Nos devuelve el identificador del weapon
+   * Nos devuelve el identificador de popularidad
    *
-   * @return El ID del weapon
+   * @return El ID de popularidad
    */
   public String getPopularidad() {
     return popularidad;
   }
 
   /**
-   * Edita el identificador del weapon de character
+   * Edita el identificador de popularidad del campeón
    *
-   @param popularidad Su nuevo weapon
+   @param popularidad El identificador de popularidad
    */
   public void setPopularidad(String popularidad) {
     this.popularidad = popularidad;
   }
 
   /**
-   * Nos da el nombre del character
+   * Nos da el porcentaje de victoria
    *
-   * @return devuelve el nombre del character
+   * @return devuelve el porcentaje de victoria
    */
   public String getPorcentajedevictoria() {
     return porcentajedevictoria;
   }
 
   /**
-   * Edita el nombre del character
+   * Edita el porcentaje de victoria del campeón
    *
-   @param porcentajedevictoria Su nuevo nombre
+   @param porcentajedevictoria El porcentaje de victorias del campeón
    */
   public void setPorcentajedevictoria(String porcentajedevictoria) {
     this.porcentajedevictoria = porcentajedevictoria;
   }
 
   /**
-   * Nos devuelve la imagen del character
+   * El identificador del porcentaje de baneo
    *
-   * @return la imagen
+   * @return devuelve el porcentaje de baneo del campeón
    */
   public String getPorcentajedebaneo() {
     return porcentajedebaneo;
   }
 
   /**
-   * Edita la imagen del character
+   * El set del porcentaje de baneo
    *
-   @param porcentajedebaneo Su nueva imagen
+   @param porcentajedebaneo Su nuevo porcentaje
    */
   public void setPorcentajedebaneo(String porcentajedebaneo) {
     this.porcentajedebaneo = porcentajedebaneo;
   }
 
   /**
-   * Nos devuelve los puntos de vida del character
+   * Nos da el KDA del campeón
    *
-   * @return la vida
+   * @return Nos devuelve el KDA
    */
   public String getKda() {
     return kda;
   }
 
   /**
-   * Edita los puntos de vida del character
+   * El set del KDA
    *
-   @param kda Su nueva vida
+   @param kda El KDA del campeón
    */
   public void setKda(String kda) {
     this.kda = kda;
   }
 
   /**
-   * Nos devuelve el variant del campeón
+   * Nos devuelve las pentas por partida
    *
-   * @return la variant
+   * @return Nos returnea los pentas por partida
    */
   public String getPentasporpartida() {
     return pentasporpartida;
   }
 
   /**
-   * Edita el variant del character
+   * El set de los pentas por partida
    *
-   @param pentasporpartida Su nueva variant
+   @param pentasporpartida Los pentas por partida
    */
   public void setPentasporpartida(String pentasporpartida) {
     this.pentasporpartida = pentasporpartida;
   }
 
   /**
-   * Devuelve una representacion del character en forma de String
+   * Devuelve una representación del campeón en forma de String
    *
-   * @return devuelve el string del character con sus atributos
+   * @return devuelve el string del campeón con sus atributos
    */
 
   @Override
