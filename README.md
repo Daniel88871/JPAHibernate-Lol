@@ -8,4 +8,4 @@ El objetivo de este proyecto será crear tablas, insertar, modificar y eliminar 
 - Insertar información
 - Modificar información
 - Mostrar datos
-- Mostrar información de ordenada por orden alfabético u orden numeral 
+- Mostrar información de forma ordenada por orden alfabético u orden numeral 
