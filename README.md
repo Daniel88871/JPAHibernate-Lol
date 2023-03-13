@@ -1,8 +1,8 @@
 # JPAHibernate
-Este proyecto es una continuacion del proyecto anterior JDBC, donde aqui usaremos la libreria Hibernate para basicamente hacer lo mismo con nuestra base de datos, pero usando otras posibles herramientas
+JPA (Java Persistence API) es una especificación de Java EE que proporciona una interfaz de programación de aplicaciones (API) para administrar la persistencia de objetos en una base de datos relacional.
 ## Objetivo del proyecto
 El objetivo de este proyecto será crear tablas, insertar, modificar y eliminar datos mediante hibernate, básicamente haremos lo mismo que la práctica anterior solo que con otra heramienta.
-##Funcionamiento desglosado
+## Funcionamiento desglosado
 - Crear tablas
 - Borrar tablas
 - Insertar información
@@ -10,4 +10,4 @@ El objetivo de este proyecto será crear tablas, insertar, modificar y eliminar 
 - Mostrar datos
 - Leer información de los CSV's
 
-##M06-JPAHibernate UF2
+## M06-JPAHibernate UF2
