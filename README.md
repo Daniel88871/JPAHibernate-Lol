@@ -8,4 +8,4 @@ El objetivo de este proyecto será crear tablas, insertar, modificar y eliminar 
 - Insertar información
 - Modificar información
 - Mostrar datos
-- Leer información de los CSV's
+- Mostrar información de ordenada por orden alfabético u orden numeral 
