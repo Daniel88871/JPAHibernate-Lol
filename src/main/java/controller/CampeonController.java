@@ -23,6 +23,10 @@ public class CampeonController {
   private EntityManagerFactory entityManagerFactory;
 
 
+  /**
+   * El CampeonController con la opción connection
+   * @param connection la conexión
+   */
   public CampeonController(Connection connection) {
     this.connection = connection;
   }

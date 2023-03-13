@@ -62,6 +62,9 @@ public class Hechizos implements Serializable {
     this.porcentajedevictoria = porcentajedevictoria;
   }
 
+  /**
+   * Un constructor vacío hechizos
+   */
   public Hechizos (){
   }
 

@@ -43,6 +43,7 @@ public class Objetos implements Serializable {
    *
    @param objetosId El identificador del objeto
    @param popularidad El identificador de popularidad que posee el objeto
+   @param porcentajedevictoria El identificador de porcentaje de victoria de los objetos
    */
   public Objetos(int objetosId, String popularidad, String porcentajedevictoria) {
     super();
@@ -51,6 +52,9 @@ public class Objetos implements Serializable {
     this.porcentajedevictoria = porcentajedevictoria;
   }
 
+  /**
+   * Un constructor vacío objetos
+   */
   public Objetos() {
   }
 

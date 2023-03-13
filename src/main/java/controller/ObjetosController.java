@@ -31,6 +31,11 @@ public class ObjetosController {
     this.connection = connection;
   }
 
+  /**
+   * El controlador de objetos con la conexión a la base de datos
+   * @param connection la conexión para los objetos
+   * @param entityManagerFactory El param de entityManagerFactory
+   */
   public ObjetosController(Connection connection, EntityManagerFactory entityManagerFactory) {
     this.connection = connection;
     this.entityManagerFactory = entityManagerFactory;

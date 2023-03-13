@@ -85,6 +85,8 @@ public class Campeones implements Serializable {
    * Construye un campeón nuevo con una serie de atributos
    *
    @param campeonesId El identificador del campeón
+   @param hechizosId El identificador de los hechizos
+   @param objetosId El identificador de los objetos
    @param nombre El identificador de nombre del campeón
    @param popularidad El identificador de popularidad del campeón
    @param porcentaje_de_victoria El identificador de porcentaje de victoria del campeón
@@ -106,6 +108,9 @@ public class Campeones implements Serializable {
     this.pentasporpartida = pentas_por_partida;
   }
 
+  /**
+   * Un constructor vacío requerido para realizar el JavaDoc
+   */
   public Campeones (){
   }
 

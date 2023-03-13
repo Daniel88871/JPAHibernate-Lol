@@ -25,7 +25,10 @@ public class HechizosController {
   private Connection connection;
   private EntityManagerFactory entityManagerFactory;
 
-
+  /**
+   * La conexión para los hechizos
+   * @param connection la conexión para los hechizos
+   */
   public HechizosController(Connection connection) {
     this.connection = connection;
   }
@@ -127,6 +130,7 @@ public class HechizosController {
    * Actualiza el nombre del hechizo que buscaras con su ID
    *
    * @param hechizoId El ID del hechizo que quieres actualizar
+   * @param hechizos1 El segundo identificador de hechizos
    */
   public void updateHechizos(int hechizoId, String hechizos1) {
     EntityManager em = entityManagerFactory.createEntityManager();
