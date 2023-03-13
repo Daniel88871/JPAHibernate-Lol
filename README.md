@@ -9,5 +9,3 @@ El objetivo de este proyecto será crear tablas, insertar, modificar y eliminar 
 - Modificar información
 - Mostrar datos
 - Leer información de los CSV's
-
-## M06-JPAHibernate UF2
