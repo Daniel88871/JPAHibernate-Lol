@@ -5,7 +5,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.210:5432/lol"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.22.122:5432/lol"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="dani"/>
             <property name="javax.persistence.jdbc.password" value="1234"/>

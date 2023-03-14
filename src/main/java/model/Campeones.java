@@ -30,6 +30,9 @@ public class Campeones implements Serializable {
    */
   @Column(name = "id_hechizos")
   int hechizosId;
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "id_hechizos", referencedColumnName = "id_hechizos")
+  private List<Hechizos> hechizos = new ArrayList<Hechizos>();
 
   /**
    * El identificador de los objetos

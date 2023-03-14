@@ -194,6 +194,8 @@ public class HechizosController {
     }
     em.close();
   }
+  //DELETE FROM campeones WHERE id_hechizos = 1;
+
 
   /**
    * Borra completamente la tabla hechizos
