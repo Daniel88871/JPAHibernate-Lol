@@ -234,6 +234,7 @@ public class Main {
         case 14:
           System.out.print("Inserta el ID del objeto que quieres borrar: ");
           int deleteNameObjeto = scanner.nextInt();
+          scanner.nextLine();
 
           objetosController.deleteObjetosByName(deleteNameObjeto);
           break;

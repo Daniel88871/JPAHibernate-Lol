@@ -95,7 +95,11 @@ public class CampeonController {
     for (Campeones campeones : result) {
       System.out.println(campeones.toString());
     }
-    em.getTransaction().commit();
+    try{
+      em.getTransaction().commit();
+    }catch (Exception e){
+
+    }
     em.close();
   }
 
